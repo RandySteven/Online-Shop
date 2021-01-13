@@ -26,6 +26,9 @@
                 background-image: linear-gradient(rgba(255,165,0,0.5), rgba(255,0,0,0.5)), url("/images/background-olshop.jpg");
             }
         </style>
+
+    <link rel="stylesheet" href="/dist/jquery.checkify.min.css">
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen">
