@@ -55,6 +55,9 @@
                             <x-dropdown-link href="{{ route('shop.transaction') }}">
                                 Transaction
                             </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('shop.show', Auth::user()) }}">
+                                My Shop
+                            </x-dropdown-link>
                             @endif
                             @if (Auth::user()->hasRole('user'))
                             <x-dropdown-link href="{{ route('transaction.history') }}">

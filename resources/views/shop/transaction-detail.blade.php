@@ -4,6 +4,9 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+    @php
+        $total = 0;
+    @endphp
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -23,17 +26,24 @@
                                 <th>Price</th>
                             </thead>
                             <tbody>
-                                @foreach ($transactions as $transaction)
+                                @foreach ($details as $detail)
+                                @php
+                                    $total += $detail->product->price * $detail->quantity;
+                                @endphp
                                     <tr class="w-full border-2 border-black">
-                                        <td><img src="{{ asset('storage/'.$transaction->product->thumbnail) }}" class="w-24 h-24 items-center ml-2" alt=""></td>
-                                        <td>{{ $transaction->product->name }}</td>
-                                        <td>Rp.{{ number_format($transaction->product->price,2) }}</td>
-                                        <td>{{ $transaction->quantity }}</td>
-                                        <td>Rp.{{ number_format($transaction->product->price * $transaction->quantity) }}</td>
+                                        <td><img src="{{ asset('storage/'.$detail->product->thumbnail) }}" class="w-24 h-24 items-center ml-2" alt=""></td>
+                                        <td>{{ $detail->product->name }}</td>
+                                        <td>Rp.{{ number_format($detail->product->price,2) }}</td>
+                                        <td>{{ $detail->quantity }}</td>
+                                        <td>Rp.{{ number_format($detail->product->price * $detail->quantity) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <div>
+                            Courier : {{ $transaction->courier->courier }} <br>
+                            Total Price : {{ number_format($total) }}
+                        </div>
                     </div>
                 </div>
             </div>

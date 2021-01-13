@@ -108,7 +108,7 @@
                                 <x-label>{{ Auth::user()->name }}</x-label>
                             </div>
                             <x-input type="hidden" name="product_id" value="{{ $product->id }}" />
-                            <textarea name="comment" id="" class="w-full" rows="10"></textarea>
+                            <textarea name="comment" id="" class="w-full" rows="5"></textarea>
                             <button type="submit">Submit</button>
                         </form>
                         @endauth

@@ -71,8 +71,8 @@ class TransactionController extends Controller
         }
         $query = "SELECT * FROM transactions JOIN transaction_details ON transactions.id=transaction_details.transaction_id JOIN products ON transactions_details.product_id=products.id JOIN
         users ON users.id=product.shop_id WHERE users.id=".Auth::user()->id."";
-        $transactions = TransactionDetail::query($query)->where('transaction_id', $transaction->id)->get();
-        return view('shop.transaction-detail', compact('transactions'));
+        $details = TransactionDetail::query($query)->where('transaction_id', $transaction->id)->get();
+        return view('shop.transaction-detail', compact('details', 'transaction'));
     }
 
     public function delete(Transaction $transaction){
