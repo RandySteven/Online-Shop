@@ -30,7 +30,7 @@ class ProductFactory extends Factory
             'desc' => $this->faker->paragraph(3),
             'thumbnail' => 'images/product/'.$this->faker->image('public/storage/images/product', 640, 480, null, false),
             'category_id' => $this->faker->numberBetween(1, 7),
-            'shop_id' => 2
+            'shop_id' => 1
         ];
     }
 }

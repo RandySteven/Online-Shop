@@ -80,8 +80,10 @@
                     </div>
                     @endforeach
                 </div>
-                <div class="text-center">
-                    &copy; Randy Steven {{ date('Y') == 2021 ? date('Y') : "2021"."-".date('Y') }}
+                <div class="my-2 text-center">
+                    <footer>
+                        &copy; Randy Steven {{ date('Y') == 2021 ? date('Y') : "2021"."-".date('Y') }}
+                    </footer>
                 </div>
             </div>
         </div>
