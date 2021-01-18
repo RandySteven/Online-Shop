@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(CategorySeeder::class);
         // $this->call(CourierSeeder::class);
         // $this->call(RoleSeeder::class);
-        \App\Models\Product::factory(10)->create();
+        // \App\Models\Product::factory(10)->create();
         // $this->call(PaymentSeeder::class);
     }
 }
