@@ -5,7 +5,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Products') }}
         </h2>
     </x-slot>
 
@@ -20,7 +20,7 @@
                         </div>
                         <div class="scrolling-pagination">
                             <div class="grid xl:grid-cols-5 sm:grid-cols-1 mx-5 my-5">
-                            @foreach ($products as $product)
+                            @forelse ($products as $product)
                                 <div class="max-w-sm rounded my-6 mx-2 overflow-hidden shadow-lg hover:shadow-xl ">
                                     <img class="w-full h-32" src="{{ asset('storage/'.$product->thumbnail) }}" alt="{{ $product->thumbnail }}">
                                     <div class="px-6 py-4">
@@ -44,7 +44,11 @@
                                     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ $product->stock }}</span>
                                     </div>
                                 </div>
-                            @endforeach
+                            @empty
+                                <div class="text-center">
+                                    No Product
+                                </div>
+                            @endforelse
                             </div>
                             {{ $products->links() }}
                         </div>
