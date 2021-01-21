@@ -109,7 +109,7 @@
                             </div>
                             <x-input type="hidden" name="product_id" value="{{ $product->id }}" />
                             <textarea name="comment" id="" class="w-full" rows="5"></textarea>
-                            <button type="submit">Submit</button>
+                            <button type="submit" class="text-white bg bg-blue-500 hover:bg-blue-400 px-2 py-1 rounded">Submit</button>
                         </form>
                         @endauth
                     </div>

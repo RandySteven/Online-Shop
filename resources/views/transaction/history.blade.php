@@ -28,7 +28,7 @@
                             @foreach ($transactions as $transaction)
                                 @php
                                     foreach ($transaction->details as $detail) {
-                                        $total += ($detail->product->price * $detail->quantity) + $transaction->courier->price;
+                                        $total += ($detail->product->price * $detail->quantity);
                                     }
                                 @endphp
                                 <tr class=" border-2 border-black">
@@ -36,9 +36,12 @@
                                     <td class=" border-2 border-black">{{ $transaction->payment->payment }}</td>
                                     <td class=" border-2 border-black">{{ $transaction->courier->courier }}</td>
                                     <td class=" border-2 border-black">{{ $transaction->invoice }}</td>
-                                    <td class="border-2 border-black">Rp. {{ number_format($total, 2) }}</td>
+                                    <td class="border-2 border-black">Rp. {{ number_format($total+$transaction->courier->price, 2) }}</td>
                                     <td><a href="{{ route('detail.history', $transaction) }}" class="px-2 rounded bg-blue-500 hover:bg-blue-400">See Detail</a></td>
                                 </tr>
+				@php
+					$total = 0;
+				@endphp
                             @endforeach
                         </tbody>
                     </table>

@@ -58,7 +58,7 @@ class TransactionController extends Controller
 
     public function shopTransaction(){
         $query = "SELECT * FROM transactions JOIN transaction_details ON transactions.id=transaction_details.transaction_id JOIN products ON transactions_details.product_id=products.id JOIN
-        users ON users.id=product.shop_id WHERE users.id=".Auth::user()->id." GROUP BY transactions.id ";
+        users ON users.id=product.shop_id WHERE products.shop_id=".Auth::user()->id." GROUP BY transactions.id ";
         $transactions = Transaction::query($query)->get();
         return view('shop.transaction', compact('transactions'));
     }
@@ -70,7 +70,7 @@ class TransactionController extends Controller
             $product_id = $product->id;
         }
         $query = "SELECT * FROM transactions JOIN transaction_details ON transactions.id=transaction_details.transaction_id JOIN products ON transactions_details.product_id=products.id JOIN
-        users ON users.id=product.shop_id WHERE users.id=".Auth::user()->id."";
+        users ON users.id=product.shop_id WHERE products.shop_id=".Auth::user()->id."";
         $details = TransactionDetail::query($query)->where('transaction_id', $transaction->id)->get();
         return view('shop.transaction-detail', compact('details', 'transaction'));
     }
