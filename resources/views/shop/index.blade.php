@@ -22,17 +22,13 @@
                             <div class="grid xl:grid-cols-5 sm:grid-cols-1 mx-5 my-5">
                             @forelse ($shops as $shop)
                                 <div class="max-w-sm rounded my-6 mx-2 overflow-hidden shadow-lg hover:shadow-xl ">
-                                    <img class="w-full h-32" src="{{ asset('storage/'.$shop->thumbnail) }}" alt="{{ $product->thumbnail }}">
+                                    <img class="w-full h-32" src="{{ asset('storage/'.$shop->image) }}" alt="{{ $shop->image }}">
                                     <div class="px-6 py-4">
                                     <div class="font-bold text-xl mb-2">{{ $shop->name }}</div>
                                     <p class="text-gray-700 text-base">
                                         {{ Str::limit($shop->address, 50, '...') }}
                                     </p>
-                                    </div>
-                                    <div class="px-6 pt-4 pb-2">
-                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                                       {{ $shop->products()->count() }}
-                                    </span>
+					<a href="{{  route('shop.show',$shop) }}">See more</a>
                                     </div>
                                 </div>
                             @empty

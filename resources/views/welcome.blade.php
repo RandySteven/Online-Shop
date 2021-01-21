@@ -49,7 +49,7 @@
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="float-none">
                     <div class="text-center">
-                        <p class="text-8xl text-white font-bold font-mono">OLSHOP</p>
+                        <p class="text-8xl text-white font-bold font-mono">OLSHOP 2</p>
                         <a href="{{ route('product.index') }}" class="bg-red-400 hover:bg-red-300 text-white rounded px-5 py-2">See Products</a>
                     </div>
                 </div>

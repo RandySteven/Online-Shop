@@ -55,7 +55,7 @@
                                         Price
                                     </td>
                                     <td>
-                                        <h2 class="text-xl font-bold">Rp.{{ number_format($product->price, 2) }},00</h2>
+                                        <h2 class="text-xl font-bold">Rp.{{ number_format($product->price, 2) }}</h2>
                                     </td>
                                 </tr>
                                 <tr class="border border-black">

@@ -24,8 +24,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $products = Product::where('id', '!=', '0');
-    if($products->count()>0){
+    $products = Product::where('id', '!=', 'NULL');
+    if($products->count()!=0){
         $products = $products->orderBy('id', 'desc')->take($products->count())->get()->random(3);
     }
     return view('welcome', compact('products'));
@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function(){
 });
 
 Route::prefix('shop')->group(function(){
+    Route::get('', [ShopController::class, 'index'])->name('shop.index');
     Route::get('/{user:name}', [ShopController::class, 'show'])->name('shop.show');
 });
 

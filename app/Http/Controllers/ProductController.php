@@ -39,7 +39,7 @@ class ProductController extends Controller
 
     public function show(Product $product){
         $products = Product::get();
-        if($products->count()>0){
+        if($products->count()>0&&$products->count()>3){
             $products = $products->sortBy('id', 3)->take($products->count())->random(3);
         }
         return view('product.show', compact('product', 'products'));
