@@ -22,8 +22,10 @@
                             <div class="grid xl:grid-cols-5 sm:grid-cols-1 mx-5 my-5">
                             @forelse ($products as $product)
                                 <div class="max-w-sm rounded my-6 mx-2 overflow-hidden shadow-lg hover:shadow-xl ">
+				<a href="{{ route('product.show', $product->slug) }} ">
                                     <img class="w-full h-32" src="{{ asset('storage/'.$product->thumbnail) }}" alt="{{ $product->thumbnail }}">
-                                    <div class="px-6 py-4">
+                                </a>
+				    <div class="px-6 py-4">
                                     <div class="font-bold text-xl mb-2">{{ $product->name }}</div>
                                     <p class="text-gray-700 text-base">
                                         {{ Str::limit($product->desc, 50, '...') }}
