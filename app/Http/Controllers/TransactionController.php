@@ -42,8 +42,8 @@ class TransactionController extends Controller
             $product->decrement('stock', $cart->quantity);
         }
         $carts->delete();
-        Mail::to(Auth::user()->email)->send(new TransactionShipped($cartUsers, $transaction));
-        return redirect('/products')->with('success', 'Success buy product');
+        // Mail::to(Auth::user()->email)->send(new TransactionShipped($cartUsers, $transaction));
+        return redirect()->route('payment.index', [$attr['payment_id']]);
     }
 
     public function history(){

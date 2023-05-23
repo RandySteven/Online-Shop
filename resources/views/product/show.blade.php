@@ -15,7 +15,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="grid xl:grid-cols-2 sm:grid-cols-1">
                         <div class="mr-2">
-                            <img src="{{ asset('storage/'.$product->thumbnail) }}" alt="">
+                            <img class="border border-black" src="{{ asset('storage/'.$product->thumbnail) }}" alt="">
                             <div class="my-5">
                                 @auth
                                     <form action="{{ route('cart.store') }}" method="POST">
@@ -27,14 +27,22 @@
                                     </form>
                                     <div class="mt-5">
                                         @if (Auth::user()->id==$product->shop->id)
-                                            <a href="{{ route('product.edit', $product->slug) }}" class="rounded text-white bg-green-600 hover:bg-green-500 px-5 py-2">Edit</a>
-                                            <div class="mt-5">
-                                                <form action="{{ route('product.delete',$product) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="bg-red-400 hover:bg-red-300 px-5 py-2 rounded">Delete</button>
-                                                </form>
-                                            </div>
+                                        <table>
+                                            <tbody>
+                                                <tr class="border border-black">
+                                                    <td class="border border-black">
+                                                        <a href="{{ route('product.edit', $product->slug) }}" class="rounded text-white bg-green-600 hover:bg-green-500 px-5 py-2">Edit</a>
+                                                    </td>
+                                                    <td class="border border-black">
+                                                            <form action="{{ route('product.delete',$product) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="bg-red-400 hover:bg-red-300 px-5 py-2 rounded">Delete</button>
+                                                            </form>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                         @endif
                                     </div>
                                 @endauth
@@ -79,21 +87,9 @@
                                         </h2>
                                     </td>
                                 </tr>
-                                <tr class="border border-black">
-                                    <td class="border-r-2 border-black">
-                                        Shop
-                                    </td>
-                                    <td>
-                                        <h2 class="text-xl font-bold">
-                                            <a href="{{ route('shop.show', $product->shop->name) }}"
-                                                class="px-2 bg-green-600 hover:bg-green-500 rounded text-white">
-                                                {{ $product->shop->name }}
-                                            </a>
-                                        </h2>
-                                    </td>
-                                </tr>
                             </table>
                             <p>
+                                <h3 class="text-xl font-bold">Description : </h3>
                                 {!! nl2br($product->desc) !!}
                             </p>
                         </div>

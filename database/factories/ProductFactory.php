@@ -28,8 +28,8 @@ class ProductFactory extends Factory
             'slug' => \Str::slug($this->faker->sentence(2)),
             'stock' => $this->faker->numberBetween(1, 500),
             'desc' => $this->faker->paragraph(3),
-            'thumbnail' => 'images/product/'.$this->faker->image('public/storage/images/product', 640, 480, null, false),
-            'category_id' => $this->faker->numberBetween(1, 7),
+            'thumbnail' => $this->faker->image('public/storage/images/product', 640, 480, null, false),
+            'category_id' => $this->faker->numberBetween(8, 21),
             'shop_id' => 1
         ];
     }

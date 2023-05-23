@@ -26,7 +26,7 @@
             .bg-image{
                 background-size: cover;
                 background-repeat: no-repeat;
-                background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("/images/background-olshop.jpg");
+                background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("/images/bg.jpg");
             }
         </style>
     </head>
@@ -35,7 +35,7 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block font-extrabold">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-200 underline">Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="text-sm text-gray-200 underline">All Products and Categories</a>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-200 underline">Login</a>
 
@@ -46,10 +46,10 @@
                 </div>
             @endif
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-6xl my-5 mx-auto sm:px-6 lg:px-8">
                 <div class="float-none">
                     <div class="text-center">
-                        <p class="text-8xl text-white font-bold font-mono">OLSHOP 2</p>
+                        <p class="text-8xl text-white font-bold font-mono">TOKO KACA AMENG</p>
                         <a href="{{ route('product.index') }}" class="bg-red-400 hover:bg-red-300 text-white rounded px-5 py-2">See Products</a>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="my-2 text-center">
                     <footer>
-                        &copy; Randy Steven {{ date('Y') == 2021 ? date('Y') : "2021"."-".date('Y') }}
+                        &copy;Dummy {{ date('Y') == 2021 ? date('Y') : "2021"."-".date('Y') }}
                     </footer>
                 </div>
             </div>

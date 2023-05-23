@@ -15,7 +15,20 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $categories = collect([
-            'Kamera', 'Baju Pria', 'Baju Wanita', 'Baju Anak', 'Elektronik', 'Wedding', 'Toys and Hobbies'
+            'Kaca',
+            'Lem',
+            'Karet Seal',
+            'Kunci',
+            'Handle Pintu',
+            'Roda Etalase',
+            'Aluminium',
+            'Paku Rivet dan Baut',
+            'Engsel Pintu',
+            'Glass Cutter',
+            'Stiker Kaca',
+            'Hand Riveter',
+            'Bor',
+            'Gerinda'
         ]);
         $categories->each(function($c){
             Category::create([

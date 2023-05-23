@@ -23,7 +23,6 @@
                         <thead class="border-2 border-black ">
                             <th>Image</th>
                             <th>Name</th>
-                            <th>Shop Name</th>
                             <th>Product Price</th>
                             <th>Qty</th>
                             <th>Price</th>
@@ -38,7 +37,6 @@
                                     <tr class="text-center">
                                         <td><img src="{{ asset('storage/'.$cart->product->thumbnail) }}" class="w-24 h-24 items-center" alt=""></td>
                                         <td>{{ $cart->product->name }}</td>
-                                        <td>{{ $cart->product->shop->name }}</td>
                                         <td>Rp.{{ number_format($cart->product->price, 2) }}</td>
                                         <td>{{ $cart->quantity }}</td>
                                         <td>Rp.{{ number_format($totalPrice, 2) }}</td>

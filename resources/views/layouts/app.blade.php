@@ -93,7 +93,7 @@
         </div>
         <footer>
             <div class="bg-red-100 text-center py-5">
-                &copy; Randy Steven {{ date('Y') == 2021 ? date('Y') : "2021"."-".date('Y') }}            </div>
+                &copy;Dummy {{ date('Y') == 2021 ? date('Y') : "2021"."-".date('Y') }}            </div>
         </footer>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

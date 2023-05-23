@@ -4,12 +4,15 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TransactionController;
+use App\Models\Chart;
 use App\Models\Product;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +34,7 @@ Route::get('/', function () {
     return view('welcome', compact('products'));
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/all-produts-and-categories', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 Route::get('/register-shop', function(){
     return view('auth.add-shop');
@@ -66,6 +69,8 @@ Route::middleware('auth')->group(function(){
 
     Route::post('/comments', [CommentController::class, 'store'])->name('comment.store');
     Route::post('/reply', [CommentController::class, 'replies'])->name('comment.reply');
+
+    Route::get('/payment/{transaction:payment_id}', [PaymentController::class, 'index'])->name('payment.index');
 });
 
 Route::prefix('shop')->group(function(){
@@ -76,5 +81,17 @@ Route::prefix('shop')->group(function(){
 Route::get('search/', [SearchController::class, 'product'])->name('search.product');
 
 Route::get('categories/{category:slug}', [CategoryController::class, 'show'])->name('category');
+
+Route::get('admin-dashboard', function(){
+    $transactions = DB::table('transactions')->select(DB::raw('count(*) as total'))->groupBy('created_at')->pluck('total')->all();
+    $chart = new Chart();
+    $chart->labels = array_keys($transactions);
+    $chart->dataset = array_values($transactions);
+    for ($i=0; $i<=count($transactions); $i++) {
+        $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+    }
+    $chart->colours = $colours;
+    return view('admin-dashboard', compact('chart'));
+})->name('admin.dashboard');
 
 require __DIR__.'/auth.php';

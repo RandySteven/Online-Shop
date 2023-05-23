@@ -16,6 +16,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="ml-7 mt-5">
+                        Invoice : {{ $transaction->invoice }}
                         <a href="{{ route('transaction.history') }}" class=" bg-green-600 hover:bg-green-500 px-4 py-2 rounded text-white">
                             See more transactions
                         </a>

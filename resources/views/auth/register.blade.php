@@ -53,7 +53,6 @@
                         <x-input id="{{ $role->id }}" type="radio" name="role_id" value="{{ $role->id }}" />
                             <label for="{{ $role->id }}" class="mx-3">{{ $role->name }}</label>
                     @endforeach
-
             </div>
 
             <div class="flex items-center justify-end mt-4">
