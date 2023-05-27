@@ -15,6 +15,7 @@
                             <th>Payment</th>
                             <th>Invoice</th>
                             <th>Phone</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </thead>
                         <tbody>
@@ -25,6 +26,7 @@
                                     <td>{{ $transaction->payment->payment }}</td>
                                     <td>{{ $transaction->invoice }}</td>
                                     <td>{{ $transaction->phone_number }}</td>
+                                    <td>{{ $transaction->status }}</td>
                                     <td>
                                         <div class="flex">
                                             <a href="{{ route('shop.detail.transaction', $transaction) }}" class="bg-blue-500 hover:bg-blue-400 px-2 py-1">See Detail</a>

@@ -26,7 +26,7 @@
                                         <button type="submit" class="rounded text-white bg-green-600 hover:bg-green-500 px-5 py-2">Add to Cart</button>
                                     </form>
                                     <div class="mt-5">
-                                        @if (Auth::user()->id==$product->shop->id)
+                                        @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('gudang'))
                                         <table>
                                             <tbody>
                                                 <tr class="border border-black">
@@ -46,6 +46,10 @@
                                         @endif
                                     </div>
                                 @endauth
+                                @guest
+                                    Untuk membeli barang harus
+                                    <a href="{{ route('register') }}" class="text-blue-400 hover:text-blue-500"> daftar </a> terlebih dahulu
+                                @endguest
                             </div>
                         </div>
                         <div>

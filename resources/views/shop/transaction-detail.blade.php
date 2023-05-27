@@ -18,6 +18,11 @@
                         <div class="my-6 mx-5">
                             Date : {{ $transaction->created_at }}
                         </div>
+                        @if ($transaction->status != 'Lunas')
+                            <form action="">
+                                <button type="submit" class="my-5 px-5 bg-blue-500 hover:bg-blue-600 text-white">Lunas</button>
+                            </form>
+                        @endif
                         <a href="{{ route('shop.transaction') }}" class=" bg-green-600 hover:bg-green-500 px-4 py-2 rounded text-white">
                             See more transactions
                         </a>

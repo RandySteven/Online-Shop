@@ -31,6 +31,7 @@ class TransactionController extends Controller
         $attr['courier_id'] = $request->get('courier_id');
         $attr['payment_id'] = $request->get('payment_id');
         $attr['invoice'] = strtoupper('TR'.random_int(0,9).random_int(0,9).random_int(0,9).random_int(0,9).$this->randchar(3));
+        $attr['status'] = 'Belum Lunas';
         $transaction = auth()->user()->transactions()->create($attr);
 
         foreach($cartUsers as $cart){
@@ -42,8 +43,8 @@ class TransactionController extends Controller
             $product->decrement('stock', $cart->quantity);
         }
         $carts->delete();
-        // Mail::to(Auth::user()->email)->send(new TransactionShipped($cartUsers, $transaction));
-        return redirect()->route('payment.index', [$attr['payment_id']]);
+        Mail::to(Auth::user()->email)->send(new TransactionShipped($cartUsers, $transaction));
+        return redirect()->route('payment.index', [$transaction->id]);
     }
 
     public function history(){

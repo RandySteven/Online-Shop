@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/comments', [CommentController::class, 'store'])->name('comment.store');
     Route::post('/reply', [CommentController::class, 'replies'])->name('comment.reply');
 
-    Route::get('/payment/{transaction:payment_id}', [PaymentController::class, 'index'])->name('payment.index');
+    Route::get('/payment/{transaction:id}', [PaymentController::class, 'index'])->name('payment.index');
 });
 
 Route::prefix('shop')->group(function(){
@@ -81,17 +81,21 @@ Route::prefix('shop')->group(function(){
 Route::get('search/', [SearchController::class, 'product'])->name('search.product');
 
 Route::get('categories/{category:slug}', [CategoryController::class, 'show'])->name('category');
+Route::get('/invoice/{transaction:id}', [PaymentController::class, 'getInvoice'])->name('getInvoice');
 
-Route::get('admin-dashboard', function(){
-    $transactions = DB::table('transactions')->select(DB::raw('count(*) as total'))->groupBy('created_at')->pluck('total')->all();
-    $chart = new Chart();
-    $chart->labels = array_keys($transactions);
-    $chart->dataset = array_values($transactions);
-    for ($i=0; $i<=count($transactions); $i++) {
-        $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
-    }
-    $chart->colours = $colours;
-    return view('admin-dashboard', compact('chart'));
-})->name('admin.dashboard');
+Route::middleware(['auth'])->group(function(){
+    Route::get('admin-dashboard', function(){
+        $transactions = DB::table('transactions')->select(DB::raw('count(*) as total'))->groupBy('created_at')->pluck('total')->all();
+        $chart = new Chart();
+        $chart->labels = array_keys($transactions);
+        $chart->dataset = array_values($transactions);
+        for ($i=0; $i<=count($transactions); $i++) {
+            $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+        }
+        $chart->colours = $colours;
+        return view('admin-dashboard', compact('chart'));
+    })->name('admin.dashboard');
+});
+
 
 require __DIR__.'/auth.php';

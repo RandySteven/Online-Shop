@@ -47,14 +47,18 @@ class RegisteredUserController extends Controller
         ]));
 
 
-        // if($request->role_id==2){
-        //     $user->assignRole('shop');
-        //     return redirect(RouteServiceProvider::SHOP);
-        // }
-        // if($request->role_id==1){
-        //     $user->assignRole('user');
-        //     return redirect(RouteServiceProvider::HOME);
-        // }
+        if($request->role_id==2){
+            $user->assignRole('admin');
+            return redirect(RouteServiceProvider::HOME);
+        }
+        if($request->role_id==1){
+            $user->assignRole('user');
+            return redirect(RouteServiceProvider::HOME);
+        }
+        if($request->role_id==3){
+            $user->assignRole('gudang');
+            return redirect(RouteServiceProvider::HOME);
+        }
         return redirect(RouteServiceProvider::HOME);
 
         // event(new Registered($user));

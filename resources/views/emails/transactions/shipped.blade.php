@@ -16,7 +16,6 @@ The body of your message.
         <thead class="border-2 border-black ">
             <th>Image</th>
             <th>Name</th>
-            <th>Shop Name</th>
             <th>Product Price</th>
             <th>Qty</th>
             <th>Price</th>
@@ -26,7 +25,6 @@ The body of your message.
             <tr>
                 <td><img src="{{ asset('storage/'.$cart->product->thumbnail) }}" alt=""></td>
                 <td>{{ $cart->product->name }}</td>
-                <td>{{ $cart->product->shop->name }}</td>
                 <td>Rp. {{ number_format($cart->product->price) }}</td>
                 <td>{{ $cart->quantity }}</td>
                 <td>Rp. {{ number_format($cart->product->price * $cart->quantity) }}</td>

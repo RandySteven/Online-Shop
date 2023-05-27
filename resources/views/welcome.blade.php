@@ -80,6 +80,7 @@
                     </div>
                     @endforeach
                 </div>
+                {{-- <a href="https://wa.me/6282191943358?text=Saya%20tertarik%20dengan%20aksesoris%20yang%20Anda%20jual" target="_blank">WA ME</a> --}}
                 <div class="my-2 text-center">
                     <footer>
                         &copy;Dummy {{ date('Y') == 2021 ? date('Y') : "2021"."-".date('Y') }}

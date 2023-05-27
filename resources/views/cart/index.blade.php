@@ -74,6 +74,7 @@
                             </div>
                             <div class="mt-4">
                                 <label for="courier_id">Courier</label>
+                                <label>*Biaya ditangung oleh pembeli</label>
                                 <select name="courier_id" class="w-full inline-block rounded">
                                     @foreach ($couriers as $courier)
                                         <option value="{{ $courier->id }}">{{ $courier->courier }}</option>
