@@ -30,10 +30,10 @@
                         </thead>
                         <tbody>
                             @forelse ($carts as $cart)
-                            @php
-                                $totalPrice = $cart->product->price * $cart->quantity;
-                            @endphp
-                                @if (Auth::user()->id==$cart->user->id)
+                                @if (Auth::user()->id==$cart->user_id)
+                                    @php
+                                        $totalPrice = $cart->product->price * $cart->quantity;
+                                    @endphp
                                     <tr class="text-center">
                                         <td><img src="{{ asset('storage/'.$cart->product->thumbnail) }}" class="w-24 h-24 items-center" alt=""></td>
                                         <td>{{ $cart->product->name }}</td>
@@ -55,7 +55,7 @@
                                     @endphp
                                 @endif
                             @empty
-                                    <div class="bg-red-300 w-full text-white py-5 text-l text-center my-2">No Item(s) in Cart</div>
+                                <div class="bg-red-300 w-full text-white py-5 text-l text-center my-2">No Item(s) in Cart</div>
                             @endforelse
                         </tbody>
                     </table>

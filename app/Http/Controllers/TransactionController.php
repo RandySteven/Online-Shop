@@ -47,6 +47,14 @@ class TransactionController extends Controller
         return redirect()->route('payment.index', [$transaction->id]);
     }
 
+    public function updateLunas(Transaction $transaction){
+        $transaction->status = 'Lunas';
+        $transaction->update([
+            'status' => 'Lunas'
+        ]);
+        return redirect('/shop-transaction');
+    }
+
     public function history(){
         $transactions = Transaction::where('user_id', auth()->user()->id)->get();
         return view('transaction.history', compact('transactions'));

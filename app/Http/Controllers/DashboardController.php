@@ -10,7 +10,7 @@ class DashboardController extends Controller
 {
     public function index(){
         $categories = Category::all();
-        $products = Product::latest()->take(20)->get();
+        $products = Product::paginate(9)->sortBy('name');
         return view('dashboard', compact('categories', 'products'));
     }
 }

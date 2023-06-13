@@ -1,72 +1,3 @@
-<link rel="stylesheet" href="{{ asset('icofont/icofont.min.css') }}">
-
-<style>
-*, *::after, *::before {
-  box-sizing: border-box;
-}
-
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: 200ms ease-in-out;
-  border: 1px solid black;
-  border-radius: 10px;
-  z-index: 10;
-  background-color: white;
-  width: 500px;
-  max-width: 80%;
-}
-
-.modal.active {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.modal-header {
-  padding: 10px 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid black;
-}
-
-.modal-header .title {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.modal-header .close-button {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background: none;
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.modal-body {
-  padding: 10px 15px;
-}
-
-#overlay {
-  position: fixed;
-  opacity: 0;
-  transition: 200ms ease-in-out;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, .5);
-  pointer-events: none;
-}
-
-#overlay.active {
-  opacity: 1;
-  pointer-events: all;
-}
-</style>
-
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
@@ -79,6 +10,7 @@
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
         <form method="POST" action="{{ route('register') }}" id="registerForm">
+            <div class="text-xl text-center">Register Karyawan</div>
             @csrf
 
             <!-- Name -->
@@ -114,7 +46,13 @@
                                 name="password_confirmation" required />
             </div>
 
-            <input type="hidden" name="role_id" value="1">
+            <div class="mt-4">
+                <x-label for="roles" :value="__('You registered as')" />
+                    <select name="role_id" id="role_id">
+                        <option value="2">Admin</option>
+                        <option value="3">Gudang</option>
+                    </select>
+            </div>
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
@@ -125,6 +63,8 @@
                     Register
                 </button>
             </div>
+
         </form>
+
     </x-auth-card>
 </x-guest-layout>

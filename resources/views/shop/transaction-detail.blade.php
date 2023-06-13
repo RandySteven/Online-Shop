@@ -18,8 +18,13 @@
                         <div class="my-6 mx-5">
                             Date : {{ $transaction->created_at }}
                         </div>
+                        <div class="my-6 mx-5">
+                            Address : {{ $transaction->address }}
+                        </div>
                         @if ($transaction->status != 'Lunas')
-                            <form action="">
+                            <form action="{{ route('update.lunas', $transaction) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
                                 <button type="submit" class="my-5 px-5 bg-blue-500 hover:bg-blue-600 text-white">Lunas</button>
                             </form>
                         @endif

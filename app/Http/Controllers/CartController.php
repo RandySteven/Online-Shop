@@ -28,6 +28,7 @@ class CartController extends Controller
             return back()->with('error', 'Quantity item harus lebih dari 1');
         }
         $attr['product_id'] = $request->get('product_id');
+        // $attr['user_id'] = $request->get('user_id');
         auth()->user()->carts()->create($attr);
         return redirect('carts/your-carts')->with('success', 'Add to cart success');
     }

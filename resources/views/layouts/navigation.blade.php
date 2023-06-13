@@ -21,30 +21,39 @@
 				{{ __('All Products and Categories') }}
 			</x-nav-link>
 		</div>
-		<div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
-			<x-nav-link :href="route('shop.index')" :active="request()->routeIs('shop.index')">
-				{{ __('Shops')  }}
-			</x-nav-link>
-		</div>
+        @if (Auth::user()->hasRole('admin'))
+            <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
+                <x-nav-link :href="route('shop.index')" :active="request()->routeIs('shop.index')">
+                    {{ __('Shops')  }}
+                </x-nav-link>
+            </div>
+        @endif
+        @if (Auth::user()->hasRole('admin'))
+            <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
+                <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                    {{ __('Admin Dashboard')  }}
+                </x-nav-link>
+            </div>
+        @endif
             </div>
 
             <!-- Settings Dropdown -->
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
 
+                    <div class="mr-5">
+                        @if (Auth::user())
+                        <a href="{{ route('cart.index') }}">
+                            <i class="icofont-cart-alt icofont-2x"></i>
+                            <b class="rounded-full bg-yellow-500 px-2 ">
+                                {{ Auth::user()->carts()->count() }}
+                            </b>
+                        </a>
+                        @endif
+                    </div>
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <div class="flex">
-                                <div class="mr-5">
-                                    @if (Auth::user()->hasRole('user'))
-                                    <a href="{{ route('cart.index') }}">
-                                        <i class="icofont-cart-alt icofont-2x"></i>
-                                        <b class="rounded-full bg-yellow-500 px-2 ">
-                                            {{ Auth::user()->carts()->count() }}
-                                        </b>
-                                    </a>
-                                    @endif
-                                </div>
                                 <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                                     <img src="{{ Auth::user()->image != null ? asset('storage/'.Auth::user()->image) : Auth::user()->gravatar() }}" class="rounded-full w-10 h-10" alt="">
                                     <div class="ml-3">

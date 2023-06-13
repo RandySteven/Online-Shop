@@ -34,11 +34,11 @@
                                                         <a href="{{ route('product.edit', $product->slug) }}" class="rounded text-white bg-green-600 hover:bg-green-500 px-5 py-2">Edit</a>
                                                     </td>
                                                     <td class="border border-black">
-                                                            <form action="{{ route('product.delete',$product) }}" method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="bg-red-400 hover:bg-red-300 px-5 py-2 rounded">Delete</button>
-                                                            </form>
+                                                        <form action="{{ route('product.delete',$product) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="bg-red-400 hover:bg-red-300 px-5 py-2 rounded">Delete</button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             </tbody>

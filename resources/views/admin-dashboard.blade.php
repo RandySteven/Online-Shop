@@ -37,6 +37,39 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <form action="{{ route('admin.dashboard.filter') }}" method="get">
+                    @csrf
+                    @php
+                        $months = [
+                            'January' => '01',
+                            'February' => '02',
+                            'March' => '03',
+                            'April' => '04',
+                            'May' => '05',
+                            'June' => '06',
+                            'July' => '07',
+                            'August' => '08',
+                            'September' => '09',
+                            'October' => '10',
+                            'November' => '11',
+                            'December' => '12'
+                        ];
+                    @endphp
+                    <select name="months" id="months">
+                        @foreach ($months as $month => $month_value)
+                            <option value="{{ $month_value }}">{{ $month }}</option>
+                        @endforeach
+                    </select>
+                    <select name="years" id="years">
+                        @for ($year = date('Y') ; $year >= 2015 ; $year--)
+                            <option value="{{ $year }}">{{ $year }}</option>
+                        @endfor
+                    </select>
+                    <button type="submit">Search</button>
+                </form>
+                <form action="{{ route('admin.dashboard') }}">
+                    <button type="submit">Reset</button>
+                </form>
                 <div class="panel panel-default">
                     <div class="panel-heading my-2">Data Transaksi</div>
                     <div class="col-lg-8">

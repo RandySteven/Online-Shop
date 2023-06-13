@@ -24,7 +24,17 @@
                                     <td>{{ $transaction->created_at->diffForHumans() }}</td>
                                     <td>{{ $transaction->courier->courier }}</td>
                                     <td>{{ $transaction->payment->payment }}</td>
-                                    <td>{{ $transaction->invoice }}</td>
+                                    @php
+                                        $link = '';
+                                        if($transaction->courier->id == 1){
+                                            $link = 'https://www.jne.co.id/id/beranda';
+                                        }else if($transaction->courier->id == 2){
+                                            $link = 'https://www.tiki.id/id/beranda';
+                                        }else if($transaction->courier->id == 3){
+                                            $link = 'https://www.jet.co.id';
+                                        }
+                                    @endphp
+                                    <td><a href="{{ $link }}" class="text-blue-500">{{ $transaction->invoice }}</a></td>
                                     <td>{{ $transaction->phone_number }}</td>
                                     <td>{{ $transaction->status }}</td>
                                     <td>

@@ -52,7 +52,7 @@
                                 </div>
                             @endforelse
                             </div>
-                            {{ $products->links() }}
+                            {{-- {{ $products->links() }} --}}
                         </div>
                     </div>
                 </div>

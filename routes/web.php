@@ -12,6 +12,7 @@ use App\Http\Controllers\TransactionController;
 use App\Models\Chart;
 use App\Models\Product;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -27,10 +28,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $products = Product::where('id', '!=', 'NULL');
-    if($products->count()!=0){
-        $products = $products->orderBy('id', 'desc')->take($products->count())->get()->random(3);
-    }
+    $products = DB::table('products as p')
+    ->join('transaction_details as td', 'p.id', '=', 'td.product_id')
+    ->join('categories as c', 'p.category_id', '=', 'c.id')
+    ->select('p.name', 'p.category_id', 'p.stock', 'c.category', 'c.slug', 'p.slug', 'p.thumbnail', 'p.desc', DB::raw('COUNT(td.product_id) AS total_sales'))
+    ->groupBy('p.name', 'p.category_id', 'p.stock', 'c.category', 'c.slug', 'p.slug', 'p.thumbnail', 'p.desc')
+    ->orderBy('total_sales', 'DESC')
+    ->limit(3)
+    ->get();
+
     return view('welcome', compact('products'));
 });
 
@@ -39,6 +45,10 @@ Route::get('/all-produts-and-categories', [DashboardController::class, 'index'])
 Route::get('/register-shop', function(){
     return view('auth.add-shop');
 })->middleware(['auth'])->name('register.shop');
+
+Route::get('/register-karyawan', function(){
+    return view('auth.register-karyawan');
+})->name('register.karyawan');
 
 Route::post('/store-shop', [ShopController::class, 'store'])->name('store.shop');
 Route::get('/shops', [ShopController::class, 'index'])->name('shop.index');
@@ -85,17 +95,41 @@ Route::get('/invoice/{transaction:id}', [PaymentController::class, 'getInvoice']
 
 Route::middleware(['auth'])->group(function(){
     Route::get('admin-dashboard', function(){
-        $transactions = DB::table('transactions')->select(DB::raw('count(*) as total'))->groupBy('created_at')->pluck('total')->all();
+        $transactions = DB::table('transactions')
+            ->select(DB::raw('COUNT(*) as transaction_count'),
+            DB::raw("DATE_FORMAT(created_at, '%Y-%m') as transaction_month"))
+            ->groupBy('transaction_month')
+            ->pluck('transaction_count', 'transaction_month');
         $chart = new Chart();
-        $chart->labels = array_keys($transactions);
-        $chart->dataset = array_values($transactions);
+        $chart->labels = $transactions->keys();
+        $chart->dataset = $transactions->values();
         for ($i=0; $i<=count($transactions); $i++) {
             $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
         }
         $chart->colours = $colours;
         return view('admin-dashboard', compact('chart'));
     })->name('admin.dashboard');
+
+    Route::get('admin-dashboard/filter/', function(Request $request){
+        $year = $request->years;
+        $month = $request->months;
+        $transaction_month = $year.'-'.$month;
+        $transactions = DB::table('transactions')
+            ->select(DB::raw('COUNT(*) as transaction_count'), DB::raw("DATE_FORMAT(created_at, '%Y-%m') as transaction_month"))
+            ->whereRaw("DATE_FORMAT(created_at, '%Y-%m') = '$transaction_month'")
+            ->groupBy('transaction_month')
+            ->pluck('transaction_count', 'transaction_month');
+        $chart = new Chart();
+        $chart->labels = $transactions->keys();
+        $chart->dataset = $transactions->values();
+        for ($i=0; $i<=count($transactions); $i++) {
+            $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+        }
+        $chart->colours = $colours;
+        return view('admin-dashboard', compact('chart'));
+    })->name('admin.dashboard.filter');
 });
 
+Route::patch('/lunas/{transaction:id}', [TransactionController::class, 'updateLunas'])->name('update.lunas');
 
 require __DIR__.'/auth.php';

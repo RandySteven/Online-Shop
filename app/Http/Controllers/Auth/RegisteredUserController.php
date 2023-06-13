@@ -49,15 +49,10 @@ class RegisteredUserController extends Controller
 
         if($request->role_id==2){
             $user->assignRole('admin');
-            return redirect(RouteServiceProvider::HOME);
-        }
-        if($request->role_id==1){
-            $user->assignRole('user');
-            return redirect(RouteServiceProvider::HOME);
-        }
-        if($request->role_id==3){
+        }else if($request->role_id==3){
             $user->assignRole('gudang');
-            return redirect(RouteServiceProvider::HOME);
+        }else {
+            $user->assignRole('user');
         }
         return redirect(RouteServiceProvider::HOME);
 

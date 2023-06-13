@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::latest()->paginate(9);
+        $products = Product::all()->sortBy('name');
         return view('product.index', compact('products'));
     }
 
@@ -66,7 +66,7 @@ class ProductController extends Controller
             $thumbnail = $product->thumbnail;
         }
         $attr['thumbnail'] = $thumbnail;
-        $attr['category_id'] = $request->get('category_id');
+        $attr['category_id'] = $request->get('category_id') != null ? $request->get('category_id') : $product->category->id;
         $attr['shop_id'] = auth()->user()->id;
         $product->update($attr);
         return redirect('products')->with('success', 'Success edit product');

@@ -28,27 +28,32 @@
                         <div class="mt-4">
                             <x-label for="name" :value="__('Name')" />
 
-                            <x-input id="name" class="block mt-1 w-full" value="{{ $product->name }}" placeholder="Product name must between 8-50" type="text" name="name" required autofocus />
+                            <input id="name" class="block mt-1 w-full" value="{{ $product->name }}" placeholder="Product name must between 8-50" type="text" name="name" required autofocus
+                                {{ Auth::user()->hasRole('gudang') ? 'readonly' : '' }}
+                                />
                         </div>
 
                         <div class="mt-4">
                             <x-label for="price" :value="__('Price')" />
-                            <x-input id="price" class="block mt-1 w-full" type="number" value="{{ $product->price }}" placeholder="Product price" name="price"  required autofocus />
+                            <input id="price" class="block mt-1 w-full" type="number" value="{{ $product->price }}" placeholder="Product price" name="price"  required autofocus
+                                {{ Auth::user()->hasRole('gudang') ? 'readonly' : '' }}/>
                         </div>
 
                         <div class="mt-4">
                             <x-label for="stock" :value="__('Stock')" />
-                            <x-input id="stock" class="block mt-1 w-full " type="number" name="stock" value="{{ $product->stock }}" placeholder="Product stock" required autofocus />
+                            <input id="stock" class="block mt-1 w-full " type="number" name="stock" value="{{ $product->stock }}" placeholder="Product stock" required autofocus />
                         </div>
 
                         <div class="mt-4">
                             <x-label for="thumbnail" :value="__('Thumbnail')" />
-                            <x-input id="thumbnail" class="block mt-1 w-full" type="file" name="thumbnail" :value="old('thumbnail')" autofocus />
+                            <input id="thumbnail" class="block mt-1 w-full" type="file" name="thumbnail" :value="old('thumbnail')" autofocus
+                            {{ Auth::user()->hasRole('gudang') ? 'readonly' : '' }}/>
                         </div>
 
                         <div class="mt-4">
                             <x-label for="desc" :value="__('Product Description')" />
-                            <textarea name="desc" id="desc" class="block mt-1 w-full" rows="10" placeholder="Product max 5000 characters">
+                            <textarea name="desc" id="desc" class="block mt-1 w-full" rows="10" placeholder="Product max 5000 characters"
+                                {{ Auth::user()->hasRole('gudang') ? 'readonly' : '' }}>
                                 {{ $product->desc }}
                             </textarea>
                         </div>
@@ -58,7 +63,9 @@
                             <select name="category_id" id="category_id" class="block mt-1 w-full">
                                 <option selected disabled>Choose one</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ $product->category->id==$category->id ? 'selected' : '' }}>{{ $category->category }}</option>
+                                    <option value="{{ $category->id }}" {{ $product->category->id==$category->id ? 'selected' : '' }} {{ Auth::user()->hasRole('gudang') ? 'disabled' : '' }}>
+                                        {{ $category->category }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
