@@ -3,6 +3,15 @@
         Products
     </x-slot>
 
+    <div class="w-full px-5 bg-white">
+        <form action="{{ route('search.product') }}" method="GET">
+            @csrf
+            <input type="text" name="name" id="" class="w-4/5">
+            <button type="submit" class="bg-blue-500 w-1/6 hover:bg-blue-400 rounded text-white px-4 py-2">Search</button>
+        </form>
+    </div>
+
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Products') }}
